@@ -1,0 +1,19 @@
+{
+  "name": "opentagger-server",
+  "version": "1.0.0",
+  "description": "An AGPL Reddit Masstagger -- Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/steamp0rt/opentagger-server.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/steamp0rt/opentagger-server/issues"
+  },
+  "homepage": "https://github.com/steamp0rt/opentagger-server#readme"
+}
