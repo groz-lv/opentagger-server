@@ -10,10 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/steamp0rt/opentagger-server.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "steamport",
+  "license": "AGPL-3.0-only",
   "bugs": {
     "url": "https://github.com/steamp0rt/opentagger-server/issues"
   },
-  "homepage": "https://github.com/steamp0rt/opentagger-server#readme"
+  "homepage": "https://github.com/steamp0rt/opentagger-server#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "snoowrap": "^1.16.0"
+  }
 }
