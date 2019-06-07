@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/steamp0rt/opentagger-server#readme",
   "dependencies": {
+    "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "snoowrap": "^1.16.0"
   }
