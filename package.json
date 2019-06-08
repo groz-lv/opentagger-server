@@ -19,6 +19,7 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "snoowrap": "^1.16.0"
+    "snoowrap": "^1.16.0",
+    "yaml": "^1.6.0"
   }
 }
