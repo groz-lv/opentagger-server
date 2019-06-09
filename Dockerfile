@@ -16,4 +16,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 8080
-CMD [ "node", "app/index.js" ]
+CMD [ "node", "app/app.js" ]
