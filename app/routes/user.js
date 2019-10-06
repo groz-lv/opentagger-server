@@ -1,15 +1,16 @@
 const cache = require('../helpers/cache');
 
 module.exports = async (req, res) => {
-    var user = req.params.user;
+    var user = req.params.user.toLowerCase();
     if (user != null) {
         var output = {};
-        output['username'] = user.toLowerCase();
+        output['username'] = user;
         const cached = await cache.getFromCache(user);
         if (cached != null) {
             console.log("Using cache for " + user + "!");
             output['subreddits'] = JSON.parse(cached.subreddits);
         } else {
+            console.log("Fetching "  + user);
             const overview = await reddit.getUser(user).getOverview().fetchAll();
             output['subreddits'] = {};
             overview.forEach(obj => {
