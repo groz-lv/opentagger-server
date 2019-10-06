@@ -1,4 +1,4 @@
-const cache = require('../helpers/cache')
+const cache = require('../helpers/cache');
 
 module.exports = async (req, res) => {
     var user = req.params.user;
@@ -18,7 +18,8 @@ module.exports = async (req, res) => {
                     if (output['subreddits'][sub] == null) {
                         output['subreddits'][sub] = {
                             karma: obj.score,
-                            posts: 1
+                            posts: 1,
+                            category: sub_sets[sub]
                         };
                     } else {
                         output['subreddits'][sub].posts += 1;
@@ -26,6 +27,7 @@ module.exports = async (req, res) => {
                     }
                 }
             });
+            cache.dumpCache(user);
             cache.pushToCache(user, output['subreddits'])
         }
         res.type('application/json');

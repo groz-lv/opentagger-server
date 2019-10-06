@@ -22,14 +22,19 @@ global.reddit = new snoowrap({
 });
 global.sets = YAML.parse(fs.readFileSync('sets.yml', { encoding: 'utf8' })).sets;
 global.all_subs = [];
+global.sub_sets = {}
 const app = express();
 
 for (var key in sets) {
     all_subs = all_subs.concat(sets[key])
+    sets[key].forEach(sub => {
+        sub_sets[sub.toLowerCase()] = key;
+    });
 }
 
 
 app.get('/user/:user', require('./routes/user'));
 app.get('/sets', require('./routes/sets'));
+app.get('/info/:user', require('./routes/info'));
 
 app.listen(process.env.PORT || 8080);
