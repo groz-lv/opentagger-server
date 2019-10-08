@@ -1,17 +1,20 @@
+const cacheDao = require('../persistance/dao/cacheDao');
+
 async function getFromCache(user) {
-    user = user.toLowerCase();
-    const conn = await pool.getConnection();
-    const rows = await conn.query('SELECT * FROM cache WHERE user = ?', [user]);
-    conn.end();
-    if (rows[0] != null) {
-        let date = new Date(rows[0].epoch);
+    const userCache = await cacheDao.findCacheByUser(user.toLowerCase());
+
+    if (userCache) {
+        const date = new Date(userCache.epoch);
+
         if (date <= Date.now()) {
-            console.log(user + " expires NOW!");
-            dumpCache(user);
+            console.log(userCache.user + " expires NOW!");
+            await cacheDao.deleteCacheByUser(userCache.user);
             return null;
         }
-        return rows[0];
+
+        return userCache;
     }
+    
     return null;
 }
 
@@ -21,13 +24,6 @@ async function pushToCache(user, subreddits) {
     date.setDate(date.getDate() + 3);
     const conn = await pool.getConnection();
     conn.query("INSERT INTO cache (`user`, `subreddits`, `epoch`) VALUES (?, ?, ?)", [user, JSON.stringify(subreddits), date.toUTCString()]);
-    conn.end();
-}
-
-async function dumpCache(user) {
-    user = user.toLowerCase();
-    const conn = await pool.getConnection();
-    conn.query('DELETE FROM cache WHERE user = ?', [user]);
     conn.end();
 }
 
