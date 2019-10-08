@@ -7,24 +7,26 @@ async function getFromCache(user) {
         const date = new Date(userCache.epoch);
 
         if (date <= Date.now()) {
-            console.log(userCache.user + " expires NOW!");
+            console.log(`${userCache.user} expires NOW!`);
             await cacheDao.deleteCacheByUser(userCache.user);
             return null;
         }
 
         return userCache;
     }
-    
+
     return null;
 }
 
 async function pushToCache(user, subreddits) {
-    user = user.toLowerCase();
-    var date = new Date();
+    const date = new Date();
     date.setDate(date.getDate() + 3);
-    const conn = await pool.getConnection();
-    conn.query("INSERT INTO cache (`user`, `subreddits`, `epoch`) VALUES (?, ?, ?)", [user, JSON.stringify(subreddits), date.toUTCString()]);
-    conn.end();
+
+    await cacheDao.createCache({
+        user: user.toLowerCase(),
+        subreddits: JSON.stringify(subreddits),
+        epoch: date.toUTCString(),
+    });
 }
 
 module.exports = {
