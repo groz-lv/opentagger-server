@@ -30,7 +30,6 @@ async function pushToCache(user, subreddits) {
 }
 
 module.exports = {
-    dumpCache: dumpCache,
     pushToCache: pushToCache,
     getFromCache: getFromCache
 };

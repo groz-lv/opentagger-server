@@ -28,8 +28,8 @@ module.exports = async (req, res) => {
                     }
                 }
             });
-            cache.dumpCache(user);
-            cache.pushToCache(user, output['subreddits'])
+
+            await cache.pushToCache(user, output['subreddits'])
         }
         res.type('application/json');
         res.send(JSON.stringify(output));
